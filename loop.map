@@ -6,7 +6,9 @@
       "desc": "You are in a simple room with white walls.",
       "exits": {
         "north": "A blue room",
-        "east": "A red room"
+        "east": "A red room",
+        "northwest": "A green room"
+        
       },
       "items": ["white roses"]
     },
@@ -14,7 +16,7 @@
       "name": "A blue room",
       "desc": "This room is simple, too, but with blue walls.",
       "exits": {
-        "east": "A green room",
+        "west": "A green room",
         "south": "A white room"
       },
       "items": ["sword","roses"]
@@ -23,10 +25,11 @@
       "name": "A green room",
       "desc": "You are in a simple room, with bright green walls.",
       "exits": {
-        "west": "A blue room",
-        "south": "A red room"
+        "east": "A blue room",
+        "south": "A red room",
+        "southeast": "A white room"
       },
-      "items": ["magic wand"]
+      "items": ["magic wand","banana", "bandana", "bellows", "deck of cards"]
     },
     {
       "name": "A red room",

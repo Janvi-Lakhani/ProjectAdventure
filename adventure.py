@@ -12,8 +12,8 @@ class Room:
     def describe(self):
         room_info = f"> {self.name}\n\n{self.desc}\n"
         if self.items:
-            room_info += "\nItems: " + " ".join(self.items) + "\n"
-        room_info += "\nExits: " + " ".join(self.exits.keys()) + "\n"
+            room_info += "\nItems: " + ", ".join(self.items) + "\n"
+        room_info += "\nExits: " + ", ".join(self.exits.keys()) + "\n"
         if self.locked:
             room_info += "\nThis room is locked.\n"
         return room_info
@@ -88,7 +88,7 @@ class GameState:
         if len(partial_matches) == 1:
             return partial_matches[0]
         elif len(partial_matches) > 1:
-            print("Ambiguous direction. Please be more specific.")
+            print(f"Did you want to go {', '.join(partial_matches)}?")
             return None
         else:
             print(f"There's no way to go {action}.")

@@ -196,19 +196,6 @@ def load_game_map(filename):
 def is_valid_map(data):
     if "start" not in data or "rooms" not in data:
         return False
-    
-    room_names = set()
-    for room in data["rooms"]:
-        if not all(key in room for key in ["name","desc","exits"]):
-            return False
-        if room["name"] in room_names:
-            return False
-        room_names.add(room["name"])
-        if not isinstance(room["exits"],dict):
-            return False
-        for exit_room in room["exits"].values():
-            if exit_room not in room_names:
-                return False
     return True
     
 def main():

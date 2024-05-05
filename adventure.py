@@ -13,7 +13,7 @@ class Room:
         room_info = f"> {self.name}\n\n{self.desc}\n"
         if self.items:
             room_info += "\nItems: " + ", ".join(self.items) + "\n"
-        room_info += "\nExits: " + ", ".join(self.exits.keys()) + "\n"
+        room_info += "\nExits: " + " ".join(self.exits.keys()) + "\n"
         if self.locked:
             room_info += "\nThis room is locked.\n"
         return room_info

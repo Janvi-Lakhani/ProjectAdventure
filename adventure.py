@@ -176,6 +176,9 @@ def ask_yes_no(question):
 def load_game_map(filename):
     with open(filename) as file:
         data = json.load(file)
+        if not is_valid_map(data):
+            print("Invalid map file.",file=sys.stderr)
+            sys.exit(1)
         rooms_data = data["rooms"]
         rooms = []
         for room_data in rooms_data:

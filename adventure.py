@@ -175,27 +175,59 @@ def ask_yes_no(question):
 
 def load_game_map(filename):
     with open(filename) as file:
-        data = json.load(file)
-        if not is_valid_map(data):
+        try:
+            data = json.load(file)
+            if not is_valid_map(data):
+                sys.exit(1)
+            rooms_data = data["rooms"]
+            rooms = []
+            for room_data in rooms_data:
+                room = Room(
+                    name=room_data["name"],
+                    desc=room_data["desc"],
+                    exits=room_data["exits"],
+                    items=room_data.get("items"),
+                    locked=room_data.get("locked",False),
+                    required_items=room_data.get("required_items")
+                )
+                rooms.append(room)
+            return rooms
+        except json.JSONDecodeError as e:
+            print("Invalid JSON format:", e, file=sys.stderr)
             sys.exit(1)
-        rooms_data = data["rooms"]
-        rooms = []
-        for room_data in rooms_data:
-            room = Room(
-                name=room_data["name"],
-                desc=room_data["desc"],
-                exits=room_data["exits"],
-                items=room_data.get("items"),
-                locked=room_data.get("locked",False),
-                required_items=room_data.get("required_items")
-            )
-            rooms.append(room)
-        return rooms
     
 def is_valid_map(data):
     if "start" not in data or "rooms" not in data:
         print("Map is missing 'start' or 'rooms' key.", file=sys.stderr)
         return False
+    
+    room_names = set()
+    for room_data in data["rooms"]:
+        if "name" not in room_data or "desc" not in room_data or "exits" not in room_data:
+            print("Invalid room data: missing 'name', 'desc', or 'exits'.", file=sys.stderr)
+            return False
+        if room_data["name"] in room_names:
+            print("Duplicate room name found:", room_data["name"], file=sys.stderr)
+            return False
+        room_names.add(room_data["name"])
+        for exit_direction, exit_room in room_data["exits"].items():
+            if not isinstance(exit_room, str) and not isinstance(exit_room, dict):
+                print("Invalid exit data in room:", room_data["name"], file=sys.stderr)
+                return False
+            if isinstance(exit_room, dict):
+                if "unlocked_room" not in exit_room or "locked" not in exit_room:
+                    print("Invalid exit data in room:", room_data["name"], file=sys.stderr)
+                    return False
+                if exit_room["locked"] and "required_items" not in exit_room:
+                    print("Invalid exit data in room:", room_data["name"], file=sys.stderr)
+                    return False
+                if not isinstance(exit_room["unlocked_room"], str):
+                    print("Invalid exit data in room:", room_data["name"], file=sys.stderr)
+                    return False
+                for required_item in exit_room.get("required_items", []):
+                    if not isinstance(required_item, str):
+                        print("Invalid exit data in room:", room_data["name"], file=sys.stderr)
+                        return False
     return True
     
 def main():

@@ -83,16 +83,23 @@ class GameState:
         exact_match = [exit for exit in exits if exit == action]
         if exact_match:
             return exact_match[0]
-        for exit in exits:
-            if exit.startswith(action) and len(exit) > 1:
-                return exit
-        return None
+        
+        partial_matches = [exit for exit in exits if exit.startswith(action)]
+        if len(partial_matches) == 1:
+            return partial_matches[0]
+        elif len(partial_matches) > 1:
+            print("Ambiguous direction. Please be more specific.")
+            return None
+        else:
+            print(f"There's no way to go {action}.")
+            return None
     
-    def match_item(self,action):
-        for item in self.current_room.items:
-            if item.startswith(action):
-                return item
-        return None
+    def match_item(self, action):
+        items = self.current_room.items
+        matches = [item for item in items if action in item]
+        if not matches:
+            print("No such item found.")
+        return matches
     
     def move_to_room(self, direction):
         if direction in self.current_room.exits:

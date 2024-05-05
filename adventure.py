@@ -177,7 +177,6 @@ def load_game_map(filename):
     with open(filename) as file:
         data = json.load(file)
         if not is_valid_map(data):
-            print("Invalid map file.",file=sys.stderr)
             sys.exit(1)
         rooms_data = data["rooms"]
         rooms = []
@@ -195,7 +194,24 @@ def load_game_map(filename):
     
 def is_valid_map(data):
     if "start" not in data or "rooms" not in data:
+        print("Map is missing 'start' or 'rooms' key.", file=sys.stderr)
         return False
+    room_names = set()
+    for room in data["rooms"]:
+        if not all(key in room for key in ["name", "desc", "exits"]):
+            print("Room is missing required keys (name, desc, exits).", file=sys.stderr)
+            return False
+        if room["name"] in room_names:
+            print("Duplicate room name detected.", file=sys.stderr)
+            return False
+        room_names.add(room["name"])
+        if not isinstance(room["exits"], dict):
+            print("Exits should be a dictionary.", file=sys.stderr)
+            return False
+        for exit_room in room["exits"].values():
+            if exit_room not in room_names:
+                print("Exit room not found.", file=sys.stderr)
+                return False
     return True
     
 def main():

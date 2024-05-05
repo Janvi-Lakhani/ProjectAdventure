@@ -1,0 +1,63 @@
+{
+  "start": "A white room",
+  "rooms": [
+    {
+      "name": "A white room",
+      "desc": "You are in a simple room with white walls.",
+      "exits": {
+        "north": "A blue room",
+        "east": "A red room"
+      },
+      "items": ["white roses"]
+    },
+    {
+      "name": "A blue room",
+      "desc": "This room is simple, too, but with blue walls.",
+      "exits": {
+        "east": "A green room",
+        "south": "A white room"
+      },
+      "items": ["sword","roses"]
+    },
+    {
+      "name": "A green room",
+      "desc": "You are in a simple room, with bright green walls.",
+      "exits": {
+        "west": "A blue room",
+        "south": "A red room"
+      },
+      "items": ["magic wand"]
+    },
+    {
+      "name": "A red room",
+      "desc": "This room is fancy. It's red!",
+      "exits": {
+        "north": "A green room",
+        "west": "A white room",
+        "south": "A yellow room"
+      },
+      "items": ["rose"]
+    },
+    {
+        "name": "A yellow room",
+        "desc": "This room is wonderful, with yellow walls.",
+        "exits": {
+            "north": "A red room",
+            "west": {
+                "locked": true,
+                "required_items": ["sword","magic wand"],
+                "unlocked_room": "Boss Room"
+            }
+        }
+    },
+    {
+        "name": "Boss Room", 
+        "desc": "The Boss Room is the final level of this game. You will need sword and magic wand to fight the boss. Level completed.",
+        "exits": {
+            "north": "A white room",
+            "east": "A yellow room"
+        }
+        
+    }
+  ]
+}

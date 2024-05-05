@@ -64,7 +64,7 @@ class GameState:
                 print("Sorry, you need to 'get' something.")
         elif action == "drop" or action.startswith("d"):
             if len(command_parts) > 1:
-                self.drop_item(command_parts[1])
+                self.drop_item(" ".join(command_parts[1:]))
             else:
                 print("Drop what?")
         else:

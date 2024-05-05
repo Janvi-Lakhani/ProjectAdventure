@@ -213,6 +213,20 @@ def main():
     parser.add_argument("map_filename")
     args = parser.parse_args()
 
+    try:
+        with open(args.map_filename) as file:
+            map_data = json.load(file)
+    except FileNotFoundError:
+        print("Error: Map file not found.", file=sys.stderr)
+        sys.exit(1)
+    except json.JSONDecodeError:
+        print("Error: Invalid JSON format.", file=sys.stderr)
+        sys.exit(1)
+    
+    if not is_valid_map(map_data):
+        print("Error: Invalid map format.", file=sys.stderr)
+        sys.exit(1)
+
     while True: 
         rooms = load_game_map(args.map_filename)
         game_state = GameState(rooms)

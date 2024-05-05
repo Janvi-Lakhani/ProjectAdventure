@@ -51,7 +51,9 @@ class GameState:
             if(len(self.inventory)==0):
                 print("You're not carrying anything.")
             else:
-                print(f"Inventory:\n  {'\n'.join(self.inventory)}")
+                print("Inventory:")
+                for item in self.inventory:
+                    print(f"  {item}")
         elif action == "go":
             if len(command_parts) > 1:
                 self.move_to_room(command_parts[1])

@@ -2,11 +2,11 @@ Janvi Lakhani jlakhani@stevens.edu
 
 # GitHub Repository:
 
-https://github.com/Janvi-Lakhani/Project_Adventure
+https://github.com/Janvi-Lakhani/ProjectAdventure
 
 # Time Spent on the Project:
 
-Estimated hours spent: 15 hours
+Estimated hours spent: 20 hours
 
 # Code Testing:
 
@@ -26,11 +26,20 @@ Manual testing
 
 # Any bugs or issues I could not resolve:
 
-No, There is not any bugs or issues I could not solve.
+I was not able to solve exit and start status for Invalid map. This test failed on gradescope after uploading the files those failed cases are,
+
+For loop_badexit.map...FAILED!
+Expected non-zero exit status, got 0.
+Expected non-empty STDERR, was empty.
+
+For loop_badstart.map...FAILED!
+Expected non-zero exit status, got 0.
+Expected non-empty STDERR, was empty.
 
 # Resolved Challenges:
 
 Challenge: Initially, I used a large number of if statements to try to handle various scenarios, but this led to a lot of duplicated code, logical errors, and a more complicated code structure.
+
 Solution: I adopted Python's construct machine to refactor the code, which not only effectively streamlined the code but also reduced the occurrence of errors and made debugging less challenging.
 
 # Implemented Extensions:

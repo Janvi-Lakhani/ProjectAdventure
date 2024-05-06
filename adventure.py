@@ -239,9 +239,9 @@ def is_valid_map(data):
                 if exit_room["locked"] and exit_room["unlocked_room"] not in room_names:
                     print("Locked room references non-existent room:", exit_room["unlocked_room"], file=sys.stderr)
                     sys.exit(1)
-            if isinstance(exit_room, str) and exit_room not in room_names:
-                print("Exit room references non-existent room:", exit_room, file=sys.stderr)
-                sys.exit(1)
+                if isinstance(exit_room, str) and exit_room not in room_names:
+                    print("Exit room references non-existent room:", exit_room, file=sys.stderr)
+                    sys.exit(1)
     return True
     
 def main():

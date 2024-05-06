@@ -50,7 +50,7 @@ class GameState:
             self.display_help()
         elif action == "inventory" or action.startswith("inv"):
             if(len(self.inventory)==0):
-                print("You're not carrying anything.",file=sys.stderr)
+                print("You're not carrying anything.")
             else:
                 print("Inventory:")
                 for item in self.inventory:
@@ -79,7 +79,7 @@ class GameState:
                 if item_match:
                     self.get_item(item_match)
                 else:
-                    print("Unknown command. Type 'help' for a list of commands.",file=sys.stderr)
+                    print("Unknown command. Type 'help' for a list of commands.")
 
     def match_exit(self, action):
         exits = self.current_room.exits.keys()

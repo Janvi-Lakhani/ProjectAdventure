@@ -51,7 +51,8 @@
                 "required_items": ["sword","magic wand"],
                 "unlocked_room": "Boss Room"
             }
-        }
+        },
+        "items": []
     },
     {
         "name": "Boss Room", 
@@ -59,8 +60,8 @@
         "exits": {
             "north": "A white room",
             "east": "A yellow room"
-        }
-        
+        },
+        "items": []
     }
   ]
 }
